@@ -2,7 +2,6 @@ import React from 'react';
 import {Image, StyleSheet, ImageBackground, View} from 'react-native';
 import imageLogo from './logo_ios.png';
 import imageBackground from './background_ios_3x.png';
-// const imageBackground = {uri: './background_ios@3x.png'};
 
 export const LoadingScreen = () => {
   return (
