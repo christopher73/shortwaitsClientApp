@@ -51,13 +51,18 @@ export const presets = {
     color: color.palette.secondaryTextColor,
     // marginTop: spacing.huge,
   },
+  products: {
+    ...BASE,
+    fontSize: fontSize.body1,
+    color: color.palette.primaryTextColor,
+  },
   /**
    * Field labels that appear on forms above the inputs.
    */
   fieldLabel: {
     ...BASE,
-    fontSize: 13,
-    color: color.dim,
+    fontSize: fontSize.link,
+    color: color.palette.primaryTextColor,
   },
   /**
    * A smaller piece of secondard information.
@@ -67,12 +72,6 @@ export const presets = {
     fontSize: 9,
     color: color.dim,
   },
-  whatsApp: {
-    ...BASE,
-    fontSize: fontSize.body2,
-    marginHorizontal: 10,
-    color: color.palette.secondaryTextColor,
-  },
   link: {
     ...BASE,
     fontSize: fontSize.link,
@@ -80,12 +79,18 @@ export const presets = {
   },
   info: {
     ...BASE,
+    textAlign: 'center',
     width: width * 0.85,
-    marginTop: spacing.huge,
     fontSize: fontSize.info,
     color: color.palette.subtitleTextColor,
     fontFamily: typography.primary,
     fontWeight: '100',
+    marginBottom: spacing.large,
+  },
+  whatsapp: {
+    ...BASE,
+    fontSize: fontSize.link,
+    color: color.palette.secondaryTextColor,
   },
 };
 

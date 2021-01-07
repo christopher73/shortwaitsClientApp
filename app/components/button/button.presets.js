@@ -15,12 +15,7 @@ const BASE_VIEW = {
   justifyContent: 'center',
   alignItems: 'center',
   width: width * 0.82,
-};
-
-const BASE_TEXT = {
-  paddingHorizontal: spacing.small,
-  letterSpacing: 0.7,
-  color: color.palette.secondaryTextColor,
+  marginBottom: spacing.large,
 };
 
 /**
@@ -33,10 +28,25 @@ export const viewPresets = {
     ...BASE_VIEW,
     backgroundColor: color.palette.primaryColor,
   },
-  whatsApp: {
+  whatsapp: {
     ...BASE_VIEW,
-    // marginTop: spacing.huge,
     backgroundColor: color.palette.whatsApp,
+    flexDirection: 'row',
+    // marginBottom: spacing.large,
+  },
+  location: {
+    ...BASE_VIEW,
+    backgroundColor: color.transparent,
+    borderColor: color.palette.primaryColor,
+    borderWidth: 2,
+    flexDirection: 'row',
+    marginVertical: spacing.medium,
+  },
+  sms: {
+    ...BASE_VIEW,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    borderWidth: 1.2,
+    borderColor: color.palette.iconsColor,
     flexDirection: 'row',
     // marginBottom: spacing.large,
   },
@@ -59,12 +69,22 @@ export const viewPresets = {
   whiteLink: {
     ...BASE_VIEW,
   },
+  simpleLink: {
+    ...BASE_VIEW,
+  },
+};
+
+const BASE_TEXT = {
+  // paddingHorizontal: spacing.small,
+  fontFamily: typography.primary,
+  letterSpacing: 0.7,
+  color: color.palette.primaryTextColor,
 };
 
 export const textPresets = {
   primary: {
     ...BASE_TEXT,
-    fontSize: 16,
+    fontSize: fontSize.link,
     color: color.palette.secondaryTextColor,
   },
   skipLink: {
@@ -76,12 +96,34 @@ export const textPresets = {
   },
   blackLink: {
     ...BASE_TEXT,
-    color: color.palette.primaryTextColor,
+    fontSize: fontSize.link,
   },
   whiteLink: {
     ...BASE_TEXT,
+    color: color.palette.secondaryTextColor,
+    fontSize: fontSize.link,
   },
   whatsApp: {
     ...BASE_TEXT,
+  },
+  location: {
+    ...BASE_TEXT,
+    color: color.palette.primaryColor,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    fontSize: fontSize.link,
+  },
+  simpleLink: {
+    ...BASE_TEXT,
+    fontSize: fontSize.link,
+    color: color.palette.primaryTextColor,
+    textDecorationLine: 'underline',
+  },
+
+  // the button uses compoenent text so any changes go to components/text/text.presets
+  sms: {
+    ...BASE_TEXT,
+    fontSize: fontSize.link,
+    color: color.palette.secondaryTextColor,
   },
 };

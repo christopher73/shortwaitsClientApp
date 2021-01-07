@@ -8,7 +8,7 @@ export const palette = {
   //background-colors
   primaryBackgroundColor: '#f5f5f5',
   backgroundWhite: '#ffffff',
-
+  backgroundWhite2: '#f8f8f8f8',
   //text-colors
   primaryTextColor: '#262628',
   secondaryTextColor: '#ffffff',

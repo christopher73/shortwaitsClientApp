@@ -1,8 +1,12 @@
 import React from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import PhoneInput from 'react-native-phone-input';
-import {color, spacing} from '../../themes';
+import {color, fontSize, spacing} from '../../themes';
 import {Button, Text} from '../../components';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {useNavigation} from '@react-navigation/native';
+import {useTranslation} from 'react-i18next';
+
 const width = Dimensions.get('screen').width;
 
 export const PhoneNumberInputContainer = ({
@@ -10,35 +14,49 @@ export const PhoneNumberInputContainer = ({
   setValue,
   setIsAuthenticating,
 }) => {
-  const handleAuth = () => {
-    setIsAuthenticating((s) => true);
-  };
+  const navigation = useNavigation();
+  const {t} = useTranslation();
+
+  const handleAuth = () => navigation.navigate('verifyPhone');
 
   return (
     <View style={styles.container}>
-      <Text
-        text={'Enter your Phone number'}
-        preset="header"
-        style={{textAlign: 'left'}}
-      />
       <PhoneInput
-        style={{width: width * 0.82}}
-        textStyle={{fontSize: 20}}
+        style={styles.phoneInput}
+        textProps={{
+          placeholder: t('auth.phoneNumber'),
+          placeholderTextColor: color.palette.primaryTextColor,
+        }}
+        textStyle={styles.phoneInputText}
         ref={(ref) => {
           value = ref;
         }}
       />
-      <Button onPress={handleAuth} text="Send confirmation code" />
-      <Text
-        text='By tapping "Send confirmation code" above, we will send you an SMS or WhatsApp message to comfirm your phone number. Message & data rates may apply'
-        preset="info"
-        style={{textAlign: 'left'}}
-      />
+      <Button onPress={handleAuth} preset="whatsapp">
+        <Text preset="whatsapp">
+          {t('auth.whatsApp.part1')} <Icon name="whatsapp" size={20} />
+          {' ' + t('auth.whatsApp.part2')}
+        </Text>
+      </Button>
+      <Button onPress={handleAuth} text={t('auth.sms')} preset="sms" />
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
+    marginTop: 'auto',
+  },
+  phoneInput: {
+    paddingHorizontal: 10,
+    width: width * 0.82,
+    marginVertical: spacing.large,
+    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: color.palette.primaryBackgroundColor,
+    height: 45,
+    borderRadius: 7,
+  },
+  phoneInputText: {
+    fontSize: fontSize.body2,
   },
 });

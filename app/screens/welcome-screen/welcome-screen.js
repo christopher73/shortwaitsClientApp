@@ -1,48 +1,58 @@
 import React from 'react';
-import {AppRegistry, StyleSheet, View} from 'react-native';
+import {AppRegistry, StyleSheet, Platform, StatusBar, View} from 'react-native';
 import Swiper from 'react-native-swiper';
 import {WelcomeContainer} from '../../containers';
 import {color} from '../../themes';
+import {Screen} from '../../components';
+import {useTranslation} from 'react-i18next';
+
+const CONTAINER = {
+  flex: 1,
+  backgroundColor: color.transparent,
+};
 
 export const WelcomeScreen = () => {
-  const content = [
+  const {t} = useTranslation();
+  const CONTENT = [
     {
       image: require('./welcome2.png'),
-      text: 'Skip the line\nby ordering ahead',
-      description:
-        'No need to wait in line,\n choose "pick-up" for a faster checkout',
-      highlight: 'Reduce your time in crowded places',
+      header: t('welcome.slide1.header'),
+      description: t('welcome.slide1.description'),
+      highlight: t('welcome.slide1.highlight'),
       isLastScreen: false,
     },
     {
       image: require('./welcome4.png'),
-      text: 'Order online\nwith fast delivery',
-      description:
-        'We make delivery simple and sheaper,\n no extra charges or hidding fees.',
-      highlight: 'Shortwaits never collects delivery fees.',
+      header: t('welcome.slide2.header'),
+      description: t('welcome.slide2.description'),
+      highlight: t('welcome.slide2.highlight'),
       isLastScreen: false,
     },
     {
       image: require('./welcome3.png'),
-      text: 'Order from places\nnear you',
-      description:
-        'We make it simple to find the place you crave.\n Enter your address and let us do the rest',
-      highlight: 'Support your local business',
+      header: t('welcome.slide3.header'),
+      description: t('welcome.slide3.description'),
+      highlight: t('welcome.slide3.highlight'),
       isLastScreen: true,
     },
   ];
   return (
-    <Swiper
-      style={styles.wrapper}
-      showsButtons={false}
-      paginationStyle={styles.paginationStile}
-      dot={<View style={styles.dot} />}
-      activeDot={<View style={styles.activeDot} />}
-      loop={false}>
-      {content.map((elem, i) => (
-        <WelcomeContainer {...elem} key={i} />
-      ))}
-    </Swiper>
+    <Screen
+      style={CONTAINER}
+      preset="fixed"
+      backgroundColor={color.transparent}>
+      <Swiper
+        style={styles.wrapper}
+        showsButtons={false}
+        paginationStyle={styles.paginationStile}
+        dot={<View style={styles.dot} />}
+        activeDot={<View style={styles.activeDot} />}
+        loop={false}>
+        {CONTENT.map((elem, i) => (
+          <WelcomeContainer {...elem} key={i} />
+        ))}
+      </Swiper>
+    </Screen>
   );
 };
 const styles = StyleSheet.create({
