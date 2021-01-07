@@ -113,7 +113,8 @@ export const SearchLocationContainer = () => {
         styles={AUTOCOMPLETE_FIELD}
         placeholder="Enter your location"
         query={{
-          key: 'AIzaSyAkDcfa7ut2PAXpGg6WgW9ynlWk7orlWgk',
+          // key: '',
+          //GET IT FROM .env files via configs
           language: 'en', // language of the results
           //types: '(cities)'  default: 'geocode'
         }}
