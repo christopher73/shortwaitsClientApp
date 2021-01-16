@@ -1,5 +1,7 @@
 import 'react-native-gesture-handler';
 import './i18n';
+import './utils/ignore-warnings';
+
 import React, {useRef} from 'react';
 import {
   useBackButtonHandler,

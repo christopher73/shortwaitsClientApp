@@ -100,8 +100,8 @@ export const SearchLocationContainer = () => {
         }}
         onFail={(error) => console.error(error)}
         textInputProps={{
-          onChangeText: (location) => {
-            setLocation({location});
+          onChangeText: (data) => {
+            setLocation({data});
           },
         }}
         renderLeftButton={() => (

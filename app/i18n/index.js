@@ -4,10 +4,11 @@ import {getLocales} from 'react-native-localize';
 
 import * as resources from './resources';
 
-export const userLanguage = getLocales()[0].languageCode;
+export const locale = getLocales()[0];
 
 if (__DEV__) {
-  console.log('LANGUAGE (i18n) =>', userLanguage);
+  console.log('COUNTRY =>', locale.countryCode);
+  console.log('LANGUAGE (i18n) =>', locale.languageCode);
 }
 
 export default i18n.use(initReactI18next).init({
@@ -23,5 +24,5 @@ export default i18n.use(initReactI18next).init({
     ),
   },
   fallbackLng: 'en',
-  lng: userLanguage,
+  lng: locale.languageCode,
 });

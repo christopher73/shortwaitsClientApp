@@ -23,6 +23,7 @@
     "react": "16.13.1",
     "react-i18next": "^11.8.5",
     "react-native": "0.63.4",
+    "react-native-config": "^1.4.1",
     "react-native-confirmation-code-field": "^6.5.1",
     "react-native-flipper": "^0.69.0",
     "react-native-gesture-handler": "^1.9.0",

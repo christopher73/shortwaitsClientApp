@@ -32,12 +32,12 @@ export const PhoneNumberInputContainer = ({
           value = ref;
         }}
       />
-      <Button onPress={handleAuth} preset="whatsapp">
+      {/* <Button onPress={handleAuth} preset="whatsapp">
         <Text preset="whatsapp">
           {t('auth.whatsApp.part1')} <Icon name="whatsapp" size={20} />
           {' ' + t('auth.whatsApp.part2')}
         </Text>
-      </Button>
+      </Button> */}
       <Button onPress={handleAuth} text={t('auth.sms')} preset="sms" />
     </View>
   );
