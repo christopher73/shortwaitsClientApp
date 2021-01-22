@@ -29,30 +29,22 @@ import * as types from './types';
 //       return state;
 //   }
 // }
-function authState(
-  state = {isLoading: true, registrationState: '', token: null, error: null},
-  action,
-) {
+function userInit(state = {loading: true, error: null}, action) {
+  let payload = action.payload;
   switch (action.type) {
     case types.INIT_USER:
-      console.log('REDUCER INIT_USER');
-      return {...state};
-    case types.INIT_USER_SUCCESS:
-      console.log('REDUCER INIT_USER_SUCCESS', state);
-      console.log('REDUCER INIT_USER_SUCCESS returning', {
-        ...state,
-        isLoading: false,
-      });
-      return {...state, isLoading: false};
+      return {...state, payload};
+    case types.INIT_USER_ASYNC:
+      return {...state, loading: false, payload};
     default:
       return state;
   }
 }
 
-export const reducer = combineReducers({
+export default combineReducers({
   // login,
   // register,
-  authState,
+  userInit,
 });
 
 /**

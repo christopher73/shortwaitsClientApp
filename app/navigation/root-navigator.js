@@ -1,37 +1,16 @@
 import React, {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
-
-// import {AppNavigator} from './app-navigator';
+import {navigationRef} from './navigation-utilities';
+import {
+  SafeAreaProvider,
+  initialWindowMetrics,
+} from 'react-native-safe-area-context';
 import {AuthNavigator} from './auth-navigator';
 
 const Stack = createNativeStackNavigator();
-
-const RootStack = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}>
-      <Stack.Screen
-        name="authStack"
-        component={AuthNavigator}
-        options={{
-          headerShown: false,
-        }}
-      />
-      {/* {isApplicationLoaded && (
-        <Stack.Screen
-          name="appStack"
-          component={AppNavigator}
-          options={{
-            headerShown: false,
-          }}
-        />
-      )} */}
-    </Stack.Navigator>
-  );
-};
+let MainNavigator;
 
 /**
  *
@@ -39,12 +18,51 @@ const RootStack = () => {
  * @see https://reactnavigation.org/docs/typescript/#annotating-ref-on-navigationcontainer
  *
  */
-export const RootNavigator = React.forwardRef((props, ref) => {
-  return (
-    <NavigationContainer {...props} ref={ref}>
-      <RootStack />
-    </NavigationContainer>
-  );
-});
 
-RootNavigator.displayName = 'RootNavigator';
+export const RootNavigator = () => {
+  const [isApplicationLoaded, setIsApplicationLoaded] = useState(false);
+
+  console.log(
+    'state is at root-navigation ' +
+      JSON.stringify(useSelector((state) => state)),
+  );
+
+  // const isLoading = useSelector((state) => state.auth.authState.isLoading);
+  const isLoading = true;
+
+  useEffect(() => {
+    if (MainNavigator === null && !isLoading) {
+      MainNavigator = require('./main-navigator').default;
+      setIsApplicationLoaded(true);
+    }
+  }, [isLoading]);
+  return (
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      <NavigationContainer ref={navigationRef}>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen
+            name="auth"
+            component={AuthNavigator}
+            options={{
+              headerShown: false,
+            }}
+          />
+          {isApplicationLoaded && (
+            <Stack.Screen
+              name="main"
+              component={MainNavigator}
+              options={{
+                headerShown: false,
+              }}
+            />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+};
+
+// RootNavigator.displayName = 'RootNavigator';

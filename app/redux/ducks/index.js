@@ -1,1 +1,1 @@
-export {default as auth} from './auth';
+export {authReducers} from './auth/reducers';

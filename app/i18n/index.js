@@ -6,10 +6,10 @@ import * as resources from './resources';
 
 export const locale = getLocales()[0];
 
-if (__DEV__) {
-  console.log('COUNTRY =>', locale.countryCode);
-  console.log('LANGUAGE (i18n) =>', locale.languageCode);
-}
+// if (__DEV__) {
+//   console.log('COUNTRY =>', locale.countryCode);
+//   console.log('LANGUAGE (i18n) =>', locale.languageCode);
+// }
 
 export default i18n.use(initReactI18next).init({
   resources: {

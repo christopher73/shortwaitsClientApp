@@ -1,9 +1,13 @@
 import {createStore, applyMiddleware} from 'redux';
 import {persistStore} from 'redux-persist';
-
+import {rootSaga} from '../sagas';
 import {persistedReducer} from './utils';
+import createSagaMiddleware from 'redux-saga';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [
+  sagaMiddleware,
   /* other middlewares */
 ];
 
@@ -15,6 +19,8 @@ if (__DEV__ && !process.env.JEST_WORKER_ID) {
 const store = createStore(persistedReducer, applyMiddleware(...middlewares));
 
 const persistor = persistStore(store);
+
+sagaMiddleware.run(rootSaga);
 
 export {store, persistor};
 

@@ -1,3 +1,3 @@
-import {registerUser, loginUser} from './actions';
+import {registerUser, loginUser, initUser} from './actions';
 
-export const operations = {registerUser, loginUser};
+export {registerUser, loginUser, initUser};

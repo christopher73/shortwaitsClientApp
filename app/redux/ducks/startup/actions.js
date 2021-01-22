@@ -13,10 +13,9 @@ export const loginUser = (user) => {
   };
 };
 
-export const initUser = () => ({
-  type: types.INIT_USER,
-});
-
-export const initUserSucess = () => ({
-  type: types.INIT_USER_SUCCESS,
-});
+export const authInit = (payload) => {
+  return {
+    type: types.INIT_USER,
+    payload,
+  };
+};

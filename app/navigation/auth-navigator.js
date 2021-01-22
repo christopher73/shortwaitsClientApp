@@ -2,6 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {
   AuthScreen,
+  LoadingScreen,
   SignupScreen,
   VerifyPhoneScreen,
   WelcomeScreen,
@@ -12,10 +13,12 @@ const Stack = createNativeStackNavigator();
 export const AuthNavigator = () => {
   return (
     <Stack.Navigator
+      initialRouteName="loading"
       screenOptions={{
         headerShown: false,
         gestureEnabled: true,
       }}>
+      <Stack.Screen name="loading" component={LoadingScreen} />
       <Stack.Screen name="welcome" component={WelcomeScreen} />
       <Stack.Screen name="auth" component={AuthScreen} />
       <Stack.Screen name="verifyPhone" component={VerifyPhoneScreen} />
