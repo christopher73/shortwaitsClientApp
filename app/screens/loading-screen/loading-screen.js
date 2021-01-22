@@ -5,20 +5,23 @@ import imageBackground from './background_ios_3x.png';
 import {useDispatch} from 'react-redux';
 import {locale} from '../../i18n';
 import {initUser} from '../../redux/ducks/auth/operations';
-import ReduxPersist from '../Config/ReduxPersist';
-
+import {useSelector} from 'react-redux';
+import {navigateAndSimpleReset} from '../../navigation';
 export const LoadingScreen = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      initUser({
-        countryCode: locale.countryCode,
-        languageCode: locale.languageCode,
-      }),
-    );
+    dispatch(initUser());
   }, [dispatch]);
 
+  // const registrationState = useSelector(
+  //   (state) => state.auth.authState.registrationState,
+  // );
+  // useEffect(() => {
+  //   if (registrationState === 'verified') {
+  //     navigateAndSimpleReset('main');
+  //   }
+  // });
   return (
     <View style={styles.container}>
       <ImageBackground

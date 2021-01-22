@@ -3,10 +3,10 @@ import {useNavigation} from '@react-navigation/native';
 
 import {View, Text} from 'react-native';
 
-export const DashboardScreen = () => {
+export const SettingsScreen = () => {
   return (
     <View>
-      <Text>DashboardScreen</Text>
+      <Text>SettingsScreen</Text>
     </View>
   );
 };
