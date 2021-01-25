@@ -38,12 +38,7 @@ function authState(
       console.log('REDUCER INIT_USER');
       return {...state};
     case types.INIT_USER_SUCCESS:
-      console.log('REDUCER INIT_USER_SUCCESS', state);
-      console.log('REDUCER INIT_USER_SUCCESS returning', {
-        ...state,
-        isLoading: false,
-      });
-      return {...state, isLoading: false};
+      return {...state, isLoading: false, registrationState: 'verified'};
     default:
       return state;
   }

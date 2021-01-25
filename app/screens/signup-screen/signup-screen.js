@@ -12,6 +12,11 @@ export const SignupScreen = () => {
       {isLocationEnabled ? (
         <GetUserDataContainer />
       ) : (
+        /**
+         *
+         * @note this can be done also by sending to getlocation navigator
+         *
+         * */
         <GetLocationContainer setIsLocationEnabled={setIsLocationEnabled} />
       )}
     </View>

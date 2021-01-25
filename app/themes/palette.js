@@ -14,7 +14,8 @@ export const palette = {
   secondaryTextColor: '#ffffff',
   headlineTextColor: '#c1c0c9',
   subtitleTextColor: '#9b9b9b',
-
-  //other-colors
+  dark1TextColor: '#909193',
+  //other-colors'
   whatsApp: '#25D366',
+  primaryColorSelected: '#fcf7f8',
 };

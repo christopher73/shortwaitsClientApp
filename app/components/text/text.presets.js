@@ -92,6 +92,23 @@ export const presets = {
     fontSize: fontSize.link,
     color: color.palette.secondaryTextColor,
   },
+  businessType: {
+    ...BASE,
+    fontFamily: typography.primary,
+    fontSize: 14,
+    marginTop: spacing.small,
+    color: color.palette.primaryTextColor,
+    alignSelf: 'stretch',
+    textAlign: 'center',
+    // fontWeight: '700',
+  },
+  deliveryHeader: {
+    ...BASE,
+    fontSize: fontSize.body1,
+    fontWeight: '700',
+    color: color.palette.primaryTextColor,
+    marginLeft: 10,
+  },
 };
 
 /**

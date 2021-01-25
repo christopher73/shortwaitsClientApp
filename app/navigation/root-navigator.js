@@ -2,15 +2,17 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
-import {navigationRef} from './navigation-utilities';
+import {navigateAndSimpleReset, navigationRef} from './navigation-utilities';
 import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from 'react-native-safe-area-context';
+import {UtilsNavigators} from './utils-navigators';
 import {AuthNavigator} from './auth-navigator';
+// import {UpdateDeliveryAddressScreen} from '../screens';
 
-const Stack = createNativeStackNavigator();
-let MainNavigator;
+const RootStack = createNativeStackNavigator();
+let MainNavigator = null;
 
 /**
  *
@@ -27,31 +29,48 @@ export const RootNavigator = () => {
       JSON.stringify(useSelector((state) => state)),
   );
 
-  // const isLoading = useSelector((state) => state.auth.authState.isLoading);
-  const isLoading = true;
+  const authState = useSelector((state) => state.auth.authState);
+  // const isLoading = true;
 
   useEffect(() => {
-    if (MainNavigator === null && !isLoading) {
+    if (MainNavigator === null && !authState.isLoading) {
+      console.log('MAIN_NAVIGATOR IS LOADED');
       MainNavigator = require('./main-navigator').default;
       setIsApplicationLoaded(true);
     }
-  }, [isLoading]);
+  }, [authState]);
+
+  useEffect(() => {
+    isApplicationLoaded && authState.registrationState === 'verified'
+      ? navigateAndSimpleReset('main')
+      : null;
+  }, [authState, isApplicationLoaded]);
+
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator
+        <RootStack.Navigator
+          // mode="modal"
+          initialRouteName="auth"
           screenOptions={{
             headerShown: false,
           }}>
-          <Stack.Screen
+          <RootStack.Screen
             name="auth"
             component={AuthNavigator}
             options={{
               headerShown: false,
             }}
           />
+          <RootStack.Screen
+            name="utils"
+            component={UtilsNavigators}
+            options={{
+              headerShown: false,
+            }}
+          />
           {isApplicationLoaded && (
-            <Stack.Screen
+            <RootStack.Screen
               name="main"
               component={MainNavigator}
               options={{
@@ -59,7 +78,7 @@ export const RootNavigator = () => {
               }}
             />
           )}
-        </Stack.Navigator>
+        </RootStack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
   );
