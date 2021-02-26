@@ -51,6 +51,7 @@ export default {
     },
   },
   actions: {
+    next: 'Next',
     skip: 'Skip >>',
     continue: 'Continue',
     getStarted: 'Get Started',

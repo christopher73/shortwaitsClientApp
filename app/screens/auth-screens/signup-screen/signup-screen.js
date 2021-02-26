@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {View, Image, StyleSheet, Dimensions, Alert} from 'react-native';
-import {color, spacing} from '../../themes';
-
-import {GetLocationContainer, GetUserDataContainer} from '../../containers';
+import {color, spacing} from '../../../themes';
+import {GetLocationContainer, GetUserDataContainer} from '../../../containers';
 
 export const SignupScreen = () => {
   const [isLocationEnabled, setIsLocationEnabled] = useState(false);

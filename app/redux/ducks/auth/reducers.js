@@ -29,26 +29,39 @@ import * as types from './types';
 //       return state;
 //   }
 // }
-function authState(
-  state = {isLoading: true, registrationState: '', token: null, error: null},
+/**
+ *
+ * Auth States:
+ * unauthorized
+ * pending
+ * authorized
+ */
+export function userAuth(
+  state = {
+    isLoading: true,
+    registrationState: '',
+    token: null,
+    error: null,
+  },
   action,
 ) {
   switch (action.type) {
-    case types.INIT_USER:
-      console.log('REDUCER INIT_USER');
-      return {...state};
+    // case types.INIT_USER:
+    //   return {...state};
     case types.INIT_USER_SUCCESS:
-      return {...state, isLoading: false, registrationState: 'verified'};
+      return {...state, isLoading: false, registrationState: 'success'};
+    case types.INIT_USER_FAILED:
+      return {...state, isLoading: false, registrationState: 'failed'};
     default:
       return state;
   }
 }
 
-export const reducer = combineReducers({
-  // login,
-  // register,
-  authState,
-});
+// export const auth = combineReducers({
+//   // login,
+//   // register,
+//   userAuth,
+// });
 
 /**
  * backup from redux util

@@ -4,22 +4,26 @@ import {View, Image, StyleSheet, Dimensions, Alert} from 'react-native';
 import myLocation from './location.png';
 import {color, spacing} from '../../themes';
 import {Button, Text} from '../../components';
-import {useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
+import {updateUser} from '../../redux/ducks/user/actions';
+import {useDispatch} from 'react-redux';
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
 export const GetLocationContainer = ({setIsLocationEnabled}) => {
-  const navigation = useNavigation();
   const {t} = useTranslation();
-
-  const getAddress = () => navigation.navigate('');
+  const dispatch = useDispatch();
 
   const getGeolocation = () => {
     Geolocation.getCurrentPosition(
       (info) => {
         console.log(info);
+        dispatch(
+          updateUser({
+            location: {coords: {...info.coords}, timestamp: info.timestamp},
+          }),
+        );
         setIsLocationEnabled(true);
       },
       (error) => Alert.alert('Error', JSON.stringify(error)),
@@ -37,7 +41,7 @@ export const GetLocationContainer = ({setIsLocationEnabled}) => {
         preset="info"
       />
       <Button
-        onPress={getGeolocation}
+        onPress={() => getGeolocation()}
         text={t('actions.useCurrentLocation')}
         preset="location"
         icon="location-arrow"
@@ -78,3 +82,20 @@ const styles = StyleSheet.create({
     marginTop: spacing.large,
   },
 });
+
+/**
+ * get user current location response ex:
+ * {
+ *  "coords":
+ *  {
+ *    "accuracy": 20,
+ *    "altitude": 5,
+ *    "heading": 0,
+ *    "latitude": 37.421998333333335,
+ *    "longitude": -122.08400000000002,
+ *    "speed": 0
+ *  },
+ *  "mocked": false,
+ *  "timestamp": 1614313796000
+ * }
+ * */

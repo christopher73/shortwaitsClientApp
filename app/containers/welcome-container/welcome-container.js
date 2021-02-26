@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Image, Dimensions} from 'react-native';
+import {View, StyleSheet, StatusBar, Image, Dimensions} from 'react-native';
 import {color, spacing} from '../../themes';
 import {Button, Text} from '../../components';
 import {useNavigation} from '@react-navigation/native';
@@ -10,7 +10,7 @@ const height = Dimensions.get('screen').height;
 
 export const WelcomeContainer = (props) => {
   const navigation = useNavigation();
-  const nextScreen = () => navigation.navigate('auth');
+  const nextScreen = () => navigation.navigate('authStack', {screen: 'auth'});
   const {t} = useTranslation();
 
   // console.log(navigation.navigate('authStack'));
@@ -23,7 +23,7 @@ export const WelcomeContainer = (props) => {
       <Text preset="body1" style={styles.highlight} text={props.highlight} />
       {props.isLastScreen ? (
         <Button
-          onPress={nextScreen}
+          onPress={() => nextScreen()}
           preset="welcomeScreen"
           text={t('actions.getStarted')}
         />
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   wrapper: {},
   slide: {
     flex: 1,
+    paddingTop: StatusBar.currentHeight,
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: color.palette.backgroundWhite,

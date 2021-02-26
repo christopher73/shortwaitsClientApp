@@ -8,72 +8,48 @@ import {
   ImageBackground,
 } from 'react-native';
 import {spacing} from '../../themes';
-import {Text} from '../../components';
+import {Text, Button} from '../../components';
 import {useTranslation} from 'react-i18next';
 
 const width = Dimensions.get('screen').width;
 
-export const SelectServicesContainer = () => {
+export const SelectServicesContainer = ({services, setServices}) => {
   const {t} = useTranslation();
-  const SERVICES = [
-    {
-      serviceName: 'food',
-      labelName: t('signin.getUserData.food'),
-      serviceImage: require('./food.png'),
-      isSelected: false,
-    },
-    {
-      serviceName: 'groceries',
-      labelName: t('signin.getUserData.groceries'),
-      serviceImage: require('./groceries.png'),
-      isSelected: false,
-    },
-    {
-      serviceName: 'healthAndWellness',
-      labelName: t('signin.getUserData.healthAndWellness'),
-      serviceImage: require('./healthAndWellness.png'),
-      isSelected: false,
-    },
-    {
-      serviceName: 'personal care',
-      labelName: t('signin.getUserData.personalCare'),
-      serviceImage: require('./personalCare.png'),
-      isSelected: false,
-    },
-    {
-      serviceName: 'liquor',
-      labelName: t('signin.getUserData.liquor'),
-      serviceImage: require('./liquor.png'),
-      isSelected: false,
-    },
-    {
-      serviceName: 'others',
-      labelName: t('signin.getUserData.others'),
-      serviceImage: require('./other.png'),
-      isSelected: false,
-    },
-  ];
   return (
     <View style={styles.container}>
       <Text
-        style={{alignSelf: 'flex-start'}}
+        style={{alignSelf: 'flex-start', fontWeight: 'bold'}}
         text="Select services you care about"
         preset="fieldLabel"
       />
       <View style={styles.imageContainer}>
-        {SERVICES.map((elem, i) => {
-          return <Service key={elem.serviceName} elem={elem} />;
+        {services.map((elem, i) => {
+          return (
+            <Service
+              key={elem.serviceName}
+              setServices={setServices}
+              elem={elem}
+              i={i}
+            />
+          );
         })}
       </View>
     </View>
   );
 };
-const Service = ({elem}) => {
-  const [isSelected, setIsSelected] = useState(false);
+const Service = ({elem, setServices, i}) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        setIsSelected((s) => !s);
+        setServices((s) =>
+          s.map((e, index) => {
+            if (index === i) {
+              return {...e, isSelected: !e.isSelected};
+            } else {
+              return {...e};
+            }
+          }),
+        );
       }}>
       <ImageBackground
         style={styles.background}
@@ -85,7 +61,7 @@ const Service = ({elem}) => {
             text={elem.labelName}
             style={{
               ...styles.imageText,
-              backgroundColor: isSelected
+              backgroundColor: elem.isSelected
                 ? 'rgba(245, 45, 86,.1)'
                 : 'rgba(230, 240, 250,.2)',
             }}

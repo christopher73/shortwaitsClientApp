@@ -12,18 +12,16 @@ import {
   put,
   call,
 } from 'redux-saga/effects';
-import {navigateAndSimpleReset} from '../navigation';
+import {navigate, navigateAndSimpleReset} from '../navigation';
 import * as type from '../redux/ducks/auth/types';
 // Worker: Increase Counter Async (Delayed By 4 Seconds)
-export function* initUser(payload) {
+export function* initUser() {
   try {
-    console.log('SAGA' + JSON.stringify(payload));
-    console.log('4 seconds');
-    // Delay 4 Seconds
-
-    yield delay(4000);
+    // Delay 4 Second
+    yield delay(2000);
+    navigate('authStack');
     yield put({
-      type: type.INIT_USER_SUCCESS,
+      type: type.INIT_USER_FAILED,
     });
   } catch (error) {
     yield put({
@@ -32,3 +30,18 @@ export function* initUser(payload) {
     });
   }
 }
+// export function* getUserLocation() {
+//   try {
+//     // Delay 4 Second
+//     yield delay(2000);
+//     navigate('authStack');
+//     yield put({
+//       type: type.INIT_USER_FAILED,
+//     });
+//   } catch (error) {
+//     yield put({
+//       type: type.INIT_USER_ERROR,
+//       error,
+//     });
+//   }
+// }

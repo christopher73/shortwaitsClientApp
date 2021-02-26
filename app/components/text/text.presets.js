@@ -61,7 +61,7 @@ export const presets = {
    */
   fieldLabel: {
     ...BASE,
-    fontSize: fontSize.link,
+    fontSize: fontSize.body2,
     color: color.palette.primaryTextColor,
   },
   /**

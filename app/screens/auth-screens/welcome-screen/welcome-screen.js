@@ -1,9 +1,9 @@
 import React from 'react';
 import {AppRegistry, StyleSheet, Platform, StatusBar, View} from 'react-native';
 import Swiper from 'react-native-swiper';
-import {WelcomeContainer} from '../../containers';
-import {color} from '../../themes';
-import {Screen} from '../../components';
+import {WelcomeContainer} from '../../../containers';
+import {color} from '../../../themes';
+import {Screen} from '../../../components';
 import {useTranslation} from 'react-i18next';
 
 const CONTAINER = {
@@ -37,10 +37,7 @@ export const WelcomeScreen = () => {
     },
   ];
   return (
-    <Screen
-      style={CONTAINER}
-      preset="fixed"
-      backgroundColor={color.transparent}>
+    <View style={CONTAINER}>
       <Swiper
         style={styles.wrapper}
         showsButtons={false}
@@ -52,7 +49,7 @@ export const WelcomeScreen = () => {
           <WelcomeContainer {...elem} key={i} />
         ))}
       </Swiper>
-    </Screen>
+    </View>
   );
 };
 const styles = StyleSheet.create({

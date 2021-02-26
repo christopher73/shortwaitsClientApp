@@ -9,4 +9,5 @@ export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 export const INIT_USER = 'INIT_USER';
 export const INIT_USER_ASYNC = 'INIT_USER_ASYNC';
 export const INIT_USER_SUCCESS = 'INIT_USER_SUCCESS';
+export const INIT_USER_FAILED = 'INIT_USER_FAILED';
 export const INIT_USER_ERROR = 'INIT_USER_ERROR';

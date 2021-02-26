@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {ScrollView, StyleSheet, Dimensions, View} from 'react-native';
 import {BusinessTypeButton} from '../../components';
-import {spacing} from '../../themes';
+import {color, spacing} from '../../themes';
 import {DEFAULT_BUSINESS} from './business-types';
 const width = Dimensions.get('screen').width;
 
@@ -28,6 +28,7 @@ export const BusinessTypeButtonsContainer = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: spacing.medium,
+    backgroundColor: color.palette.backgroundWhite,
+    paddingLeft: spacing.medium,
   },
 });

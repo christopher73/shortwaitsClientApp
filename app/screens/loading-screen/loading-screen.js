@@ -1,12 +1,20 @@
 import React, {useEffect} from 'react';
-import {Image, StyleSheet, ImageBackground, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  ImageBackground,
+  StatusBar,
+  View,
+  Dimensions,
+} from 'react-native';
 import imageLogo from './logo_ios.png';
 import imageBackground from './background_ios_3x.png';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {locale} from '../../i18n';
 import {initUser} from '../../redux/ducks/auth/operations';
-import {useSelector} from 'react-redux';
 import {navigateAndSimpleReset} from '../../navigation';
+
+const height = Dimensions.get('screen').height;
 export const LoadingScreen = () => {
   const dispatch = useDispatch();
 
@@ -24,6 +32,7 @@ export const LoadingScreen = () => {
   // });
   return (
     <View style={styles.container}>
+      <StatusBar translucent backgroundColor="transparent" />
       <ImageBackground
         style={styles.background}
         resizeMode="cover"
@@ -46,7 +55,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    marginTop: 50,
+    marginTop: height * 0.2,
   },
   text: {
     color: 'white',

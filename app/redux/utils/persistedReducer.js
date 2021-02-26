@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {userAuth, userData} from '../ducks';
 
 const persistConfig = {
   key: 'root',
@@ -8,9 +9,10 @@ const persistConfig = {
   whitelist: [],
 };
 
-const rootReducer = combineReducers({
-  auth: require('../ducks/auth/reducers').reducer,
-});
+const rootReducer = combineReducers(
+  // auth: require('../ducks/auth/reducers').reducer,
+  {userData, userAuth},
+);
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);
 

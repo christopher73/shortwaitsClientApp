@@ -1,8 +1,9 @@
-export * from './auth-screen/auth-screen';
 export * from './loading-screen/loading-screen';
-export * from './welcome-screen/welcome-screen';
-export * from './verify-phone-screen/verify-phone-screen';
-export * from './signup-screen/signup-screen';
+//auth
+export * from './auth-screens/auth-screen/auth-screen';
+export * from './auth-screens/welcome-screen/welcome-screen';
+export * from './auth-screens/verify-phone-screen/verify-phone-screen';
+export * from './auth-screens/signup-screen/signup-screen';
 //main
 export * from './main-screens/delivery-screen/delivery-screen';
 export * from './main-screens/pickup-screen/pickup-screen';

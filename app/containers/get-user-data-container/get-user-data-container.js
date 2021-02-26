@@ -2,18 +2,69 @@ import React, {useState} from 'react';
 import {ScrollView, StyleSheet, Dimensions} from 'react-native';
 import {color, spacing, fontSize} from '../../themes';
 import {Button, Text, TextField} from '../../components';
-import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
 import {SelectServicesContainer} from '../../containers';
 import {useTranslation} from 'react-i18next';
-
+import {updateUser} from '../../redux/ducks/user/actions';
+import {navigate} from '../../navigation';
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
 export const GetUserDataContainer = () => {
-  const navigation = useNavigation();
   const {t} = useTranslation();
-  const nextScreen = () => navigation.navigate('');
+  const [services, setServices] = useState([
+    {
+      serviceName: 'food',
+      labelName: t('signin.getUserData.food'),
+      serviceImage: require('./food.png'),
+      isSelected: true,
+    },
+    {
+      serviceName: 'groceries',
+      labelName: t('signin.getUserData.groceries'),
+      serviceImage: require('./groceries.png'),
+      isSelected: false,
+    },
+    {
+      serviceName: 'healthAndWellness',
+      labelName: t('signin.getUserData.healthAndWellness'),
+      serviceImage: require('./healthAndWellness.png'),
+      isSelected: false,
+    },
+    {
+      serviceName: 'personal care',
+      labelName: t('signin.getUserData.personalCare'),
+      serviceImage: require('./personalCare.png'),
+      isSelected: false,
+    },
+    {
+      serviceName: 'liquor',
+      labelName: t('signin.getUserData.liquor'),
+      serviceImage: require('./liquor.png'),
+      isSelected: false,
+    },
+    {
+      serviceName: 'others',
+      labelName: t('signin.getUserData.others'),
+      serviceImage: require('./other.png'),
+      isSelected: false,
+    },
+  ]);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
+  const dispatch = useDispatch();
+
+  const handleSubmitButton = () => {
+    dispatch(
+      updateUser({
+        servicesOfChoice: services,
+        firstName: firstName,
+        lastName: lastName,
+      }),
+    );
+    navigate('authStack', {screen: 'verifyPhone'});
+  };
   return (
     <ScrollView
       contentContainerStyle={{alignItems: 'center'}}
@@ -28,11 +79,23 @@ export const GetUserDataContainer = () => {
         text={t('signin.getUserData.description')}
         preset="body1"
       />
-      <TextField label={t('signin.getUserData.firstName')} />
-      <TextField label={t('signin.getUserData.lastName')} />
-      <SelectServicesContainer />
-      <Button text={t('actions.submit')} />
-      {/* <Image style={styles.image} source={myLocation} /> */}
+      <TextField
+        value={firstName}
+        maxLength={20}
+        label={t('signin.getUserData.firstName')}
+        onChangeText={(text) => setFirstName(text)}
+      />
+      <TextField
+        value={lastName}
+        maxLength={20}
+        label={t('signin.getUserData.lastName')}
+        onChangeText={(text) => setLastName(text)}
+      />
+      <SelectServicesContainer services={services} setServices={setServices} />
+      <Button
+        onPress={() => handleSubmitButton()}
+        text={t('actions.continue')}
+      />
     </ScrollView>
   );
 };

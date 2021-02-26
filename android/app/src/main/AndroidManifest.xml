@@ -23,6 +23,12 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+      <!-- You will only need to add this meta-data tag, but make sure it's a child of application -->
+      <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyDEy0S0iz7VG-C-Wz77QEhqtOaTj_Ar-VA"/>
+      <!-- You will also only need to add this uses-library tag -->
+      <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
 
 </manifest>

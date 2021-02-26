@@ -13,16 +13,41 @@ const Stack = createNativeStackNavigator();
 export const AuthNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="loading"
+      initialRouteName="welcome"
       screenOptions={{
-        headerShown: false,
+        // headerShown: false,
         gestureEnabled: true,
       }}>
-      <Stack.Screen name="loading" component={LoadingScreen} />
-      <Stack.Screen name="welcome" component={WelcomeScreen} />
-      <Stack.Screen name="auth" component={AuthScreen} />
+      <Stack.Screen
+        name="welcome"
+        component={WelcomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="auth"
+        component={AuthScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="signup"
+        component={SignupScreen}
+        // options={{
+        //   header: () => null,
+        //   headerLeft: null,
+        //   headerTitle: props => (
+        //     <HeaderAuth {...props} back={false} title={'Edit Username'} />
+        //   ),
+        //   headerStyle: {
+        //     backgroundColor: g.colors.main,
+        //   },
+        //   gestureEnabled: false,
+        // }}
+      />
       <Stack.Screen name="verifyPhone" component={VerifyPhoneScreen} />
-      <Stack.Screen name="signup" component={SignupScreen} />
     </Stack.Navigator>
   );
 };

@@ -7,18 +7,21 @@ import {
   StyleSheet,
   Dimensions,
   Keyboard,
+  StatusBar,
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 import * as RNLocalize from 'react-native-localize';
-import {color, spacing} from '../../themes';
+import {color, spacing} from '../../../themes';
 import defaultBackground from './default_background.jpg';
 import logo from './logo.png';
-import {Text, Screen} from '../../components';
-import {PhoneNumberInputContainer} from '../../containers';
+import {Text, Button} from '../../../components';
+import {PhoneNumberInputContainer} from '../../../containers';
 import {useTranslation} from 'react-i18next';
+import {navigate} from '../../../navigation';
 
 const width = Dimensions.get('screen').width;
+const height = Dimensions.get('screen').height;
 const CONTAINER = {
   flex: 1,
   backgroundColor: color.transparent,
@@ -30,16 +33,6 @@ export const AuthScreen = () => {
   const {t} = useTranslation();
 
   const [cityBackground, setCityBackground] = useState(null);
-  useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
-    Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
-
-    // cleanup function
-    return () => {
-      Keyboard.removeListener('keyboardDidShow', _keyboardDidShow);
-      Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
-    };
-  }, []);
 
   useEffect(() => {
     RNLocalize.getLocales()[0].countryCode === 'PE'
@@ -47,39 +40,33 @@ export const AuthScreen = () => {
       : null;
   }, []);
 
-  const _keyboardDidShow = () => {
-    setIsBlur((s) => true);
-  };
-
-  const _keyboardDidHide = () => {
-    setIsBlur((s) => false);
-  };
-
   return (
     <View style={styles.container}>
+      <StatusBar translucent backgroundColor="transparent" />
       <ImageBackground
         style={styles.background}
         resizeMode="cover"
         source={cityBackground || defaultBackground}>
-        <Screen
+        {/* <Screen
           style={CONTAINER}
           preset="fixed"
-          backgroundColor={color.transparent}>
-          <View style={styles.overlay}>
-            <Image
-              style={isBlur ? {...styles.image, opacity: 0} : styles.image}
-              source={logo}
-            />
-            <PhoneNumberInputContainer />
-            {/* <Button
-              style={styles.info}
-              text="Don't have an account? Sign up"
-              preset="whiteLink"
-              onPress={() => navigation.navigate('signup')}
-            /> */}
-            <Text text={t('auth.info')} preset="info" style={styles.info} />
-          </View>
-        </Screen>
+          backgroundColor={color.transparent}> */}
+        <View style={styles.overlay}>
+          <Image
+            style={isBlur ? {...styles.image, opacity: 0} : styles.image}
+            source={logo}
+          />
+          <PhoneNumberInputContainer />
+          <Button
+            style={styles.info}
+            text="Don't have an account? Sign up"
+            preset="whiteLink"
+            onPress={() => navigate('authStack', {screen: 'signup'})}
+          />
+          <Text text={t('auth.info')} preset="info" style={styles.info} />
+
+          {/* </Screen> */}
+        </View>
       </ImageBackground>
     </View>
   );
@@ -101,7 +88,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     // width: width * 0.3,
     height: width * 0.25,
-    marginTop: spacing.huge,
+    marginTop: height * 0.2,
   },
   header: {
     width: width * 0.82,
@@ -112,3 +99,20 @@ const styles = StyleSheet.create({
     // marginVertical: spacing.medium,
   },
 });
+// useEffect(() => {
+//   Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
+//   Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
+
+//   // cleanup function
+//   return () => {
+//     Keyboard.removeListener('keyboardDidShow', _keyboardDidShow);
+//     Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
+//   };
+// }, []);
+// const _keyboardDidShow = () => {
+//   setIsBlur((s) => true);
+// };
+
+// const _keyboardDidHide = () => {
+//   setIsBlur((s) => false);
+// };
