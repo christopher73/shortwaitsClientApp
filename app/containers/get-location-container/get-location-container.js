@@ -11,20 +11,18 @@ import {useDispatch} from 'react-redux';
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
-export const GetLocationContainer = ({setIsLocationEnabled}) => {
+export const GetLocationContainer = () => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
 
   const getGeolocation = () => {
     Geolocation.getCurrentPosition(
       (info) => {
-        console.log(info);
         dispatch(
           updateUser({
             location: {coords: {...info.coords}, timestamp: info.timestamp},
           }),
         );
-        setIsLocationEnabled(true);
       },
       (error) => Alert.alert('Error', JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},

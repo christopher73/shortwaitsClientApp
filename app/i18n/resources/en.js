@@ -1,22 +1,21 @@
 export default {
   welcome: {
     slide1: {
-      header: 'Skip the line\nby ordering ahead',
+      header: 'Order your\nfavorite products ahead',
       description:
         'No need to wait in line,\n choose "pick-up" for a faster checkout',
       highlight: 'Reduce your time in crowded places',
     },
     slide2: {
-      header: 'Order online\nwith fast delivery',
+      header: 'Schedule\nyour next makeover',
       description:
-        'We make delivery simple and sheaper,\n no extra charges or hidding fees.',
-      highlight: 'Shortwaits never collects delivery fees.',
+        'Book any service at anytime and manage\nyour appointments anywhere',
+      highlight: 'Shortwaits never collects any fees.',
     },
     slide3: {
-      header: 'Order from places\nnear you',
-      description:
-        'We make it simple to find the place you crave.\n Enter your address and let us do the rest',
-      highlight: 'Support your local business',
+      header: 'Book your next\nyoga video class',
+      description: 'We make it simple to schedule video classes.',
+      highlight: 'We integrate with Zoom or Google Meets',
     },
   },
   auth: {

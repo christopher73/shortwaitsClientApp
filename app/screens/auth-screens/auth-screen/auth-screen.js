@@ -6,30 +6,22 @@ import {
   ImageBackground,
   StyleSheet,
   Dimensions,
-  Keyboard,
   StatusBar,
 } from 'react-native';
-
-import {useNavigation} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import * as RNLocalize from 'react-native-localize';
 import {color, spacing} from '../../../themes';
 import defaultBackground from './default_background.jpg';
 import logo from './logo.png';
-import {Text, Button} from '../../../components';
-import {PhoneNumberInputContainer} from '../../../containers';
+import {Text, Button, PhoneNumberField} from '../../../components';
 import {useTranslation} from 'react-i18next';
 import {navigate} from '../../../navigation';
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
-const CONTAINER = {
-  flex: 1,
-  backgroundColor: color.transparent,
-};
 
 export const AuthScreen = () => {
   const [isBlur, setIsBlur] = useState(false);
-  const navigation = useNavigation();
   const {t} = useTranslation();
 
   const [cityBackground, setCityBackground] = useState(null);
@@ -47,24 +39,37 @@ export const AuthScreen = () => {
         style={styles.background}
         resizeMode="cover"
         source={cityBackground || defaultBackground}>
-        {/* <Screen
-          style={CONTAINER}
-          preset="fixed"
-          backgroundColor={color.transparent}> */}
         <View style={styles.overlay}>
           <Image
-            style={isBlur ? {...styles.image, opacity: 0} : styles.image}
+            style={{
+              ...styles.image,
+              height: isBlur ? width * 0.2 : width * 0.25,
+              marginTop: isBlur ? width * 0.15 : height * 0.2,
+            }}
             source={logo}
           />
-          <PhoneNumberInputContainer />
-          <Button
-            style={styles.info}
-            text="Don't have an account? Sign up"
-            preset="whiteLink"
-            onPress={() => navigate('authStack', {screen: 'signup'})}
-          />
-          <Text text={t('auth.info')} preset="info" style={styles.info} />
 
+          <View style={{marginTop: 'auto', alignItems: 'center'}}>
+            <PhoneNumberField
+              blurBackground={setIsBlur}
+              style={styles.phoneInput}
+              getRawNumber={(s) => console.log(s)}
+            />
+            <Button text={t('auth.sms')} preset="sms" />
+            <Button preset="whatsapp">
+              <Text preset="whatsapp">
+                {t('auth.whatsApp.part1')} <Icon name="whatsapp" size={20} />
+                {' ' + t('auth.whatsApp.part2')}
+              </Text>
+            </Button>
+            <Button
+              style={styles.info}
+              text="Don't have an account? Sign up"
+              preset="whiteLink"
+              onPress={() => navigate('authStack', {screen: 'signup'})}
+            />
+            <Text text={t('auth.info')} preset="info" style={styles.info} />
+          </View>
           {/* </Screen> */}
         </View>
       </ImageBackground>
@@ -78,6 +83,9 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
   },
+  phoneInput: {
+    backgroundColor: 'rgb(255,255,255)',
+  },
   overlay: {
     flex: 1,
     backgroundColor: 'rgba(10, 10, 10, 0.75)',
@@ -86,9 +94,6 @@ const styles = StyleSheet.create({
   },
   image: {
     resizeMode: 'contain',
-    // width: width * 0.3,
-    height: width * 0.25,
-    marginTop: height * 0.2,
   },
   header: {
     width: width * 0.82,
@@ -99,20 +104,3 @@ const styles = StyleSheet.create({
     // marginVertical: spacing.medium,
   },
 });
-// useEffect(() => {
-//   Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
-//   Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
-
-//   // cleanup function
-//   return () => {
-//     Keyboard.removeListener('keyboardDidShow', _keyboardDidShow);
-//     Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
-//   };
-// }, []);
-// const _keyboardDidShow = () => {
-//   setIsBlur((s) => true);
-// };
-
-// const _keyboardDidHide = () => {
-//   setIsBlur((s) => false);
-// };

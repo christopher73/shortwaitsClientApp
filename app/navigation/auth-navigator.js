@@ -35,17 +35,9 @@ export const AuthNavigator = () => {
       <Stack.Screen
         name="signup"
         component={SignupScreen}
-        // options={{
-        //   header: () => null,
-        //   headerLeft: null,
-        //   headerTitle: props => (
-        //     <HeaderAuth {...props} back={false} title={'Edit Username'} />
-        //   ),
-        //   headerStyle: {
-        //     backgroundColor: g.colors.main,
-        //   },
-        //   gestureEnabled: false,
-        // }}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen name="verifyPhone" component={VerifyPhoneScreen} />
     </Stack.Navigator>
@@ -62,3 +54,14 @@ export const AuthNavigator = () => {
  */
 // const exitRoutes = ['welcome'];
 // export const canExit = (routeName: string) => exitRoutes.includes(routeName);
+// options={{
+//   header: () => null,
+//   headerLeft: null,
+//   headerTitle: props => (
+//     <HeaderAuth {...props} back={false} title={'Edit Username'} />
+//   ),
+//   headerStyle: {
+//     backgroundColor: g.colors.main,
+//   },
+//   gestureEnabled: false,
+// }}

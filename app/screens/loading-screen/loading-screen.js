@@ -10,9 +10,11 @@ import {
 import imageLogo from './logo_ios.png';
 import imageBackground from './background_ios_3x.png';
 import {useDispatch, useSelector} from 'react-redux';
-import {locale} from '../../i18n';
-import {initUser} from '../../redux/ducks/auth/operations';
+import {initUser} from '../../redux/ducks/auth/actions';
+import {updateUser} from '../../redux/ducks/user/actions';
+
 import {navigateAndSimpleReset} from '../../navigation';
+import {locale} from '../../i18n';
 
 const height = Dimensions.get('screen').height;
 export const LoadingScreen = () => {
@@ -20,6 +22,7 @@ export const LoadingScreen = () => {
 
   useEffect(() => {
     dispatch(initUser());
+    dispatch(updateUser({locale}));
   }, [dispatch]);
 
   // const registrationState = useSelector(

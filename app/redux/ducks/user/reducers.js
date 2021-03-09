@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+// import {combineReducers} from 'redux';
 import * as types from './types';
 
 export function userData(
@@ -10,7 +10,9 @@ export function userData(
     firstName: null,
     lastName: null,
     servicesOfChoice: null,
+    phoneNumber: null,
     token: null,
+    locale: null,
   },
   action,
 ) {

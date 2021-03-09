@@ -1,0 +1,16 @@
+[
+  {
+    "name": "United States",
+    "iso2": "us",
+    "dialCode": "1",
+    "priority": 0,
+    "areaCodes": null
+  },
+  {
+    "name": "Peru (Perú)",
+    "iso2": "pe",
+    "dialCode": "51",
+    "priority": 0,
+    "areaCodes": null
+  }
+]

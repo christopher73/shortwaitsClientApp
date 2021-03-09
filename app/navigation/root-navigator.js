@@ -29,11 +29,6 @@ let MainNavigator = null;
 export const RootNavigator = () => {
   const [isApplicationLoaded, setIsApplicationLoaded] = useState(false);
 
-  console.log(
-    'state at root-navigation:\n ' +
-      JSON.stringify(useSelector((state) => state)),
-  );
-
   const userAuthState = useSelector((state) => state.userAuth);
 
   useEffect(() => {

@@ -1,17 +1,19 @@
-import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Dimensions} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {ScrollView, StyleSheet, Dimensions, View} from 'react-native';
 import {color, spacing, fontSize} from '../../themes';
-import {Button, Text, TextField} from '../../components';
+import {Button, Text, TextField, PhoneNumberField} from '../../components';
 import {useDispatch} from 'react-redux';
 import {SelectServicesContainer} from '../../containers';
 import {useTranslation} from 'react-i18next';
 import {updateUser} from '../../redux/ducks/user/actions';
-import {navigate} from '../../navigation';
+import {navigate} from '../../navigation/navigation-utilities';
+
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
 export const GetUserDataContainer = () => {
   const {t} = useTranslation();
+
   const [services, setServices] = useState([
     {
       serviceName: 'food',
@@ -52,6 +54,7 @@ export const GetUserDataContainer = () => {
   ]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const dispatch = useDispatch();
 
@@ -61,10 +64,12 @@ export const GetUserDataContainer = () => {
         servicesOfChoice: services,
         firstName: firstName,
         lastName: lastName,
+        // phoneNumber: phoneNumberRef.getValue(),
       }),
     );
     navigate('authStack', {screen: 'verifyPhone'});
   };
+
   return (
     <ScrollView
       contentContainerStyle={{alignItems: 'center'}}
@@ -90,6 +95,18 @@ export const GetUserDataContainer = () => {
         maxLength={20}
         label={t('signin.getUserData.lastName')}
         onChangeText={(text) => setLastName(text)}
+      />
+      <Text
+        preset="fieldLabel"
+        text={t('auth.phoneNumber')}
+        style={{width: width * 0.85}}
+      />
+      <PhoneNumberField
+        style={{
+          width: width * 0.85,
+          borderBottomWidth: 1.7,
+          borderColor: color.palette.iconsColor,
+        }}
       />
       <SelectServicesContainer services={services} setServices={setServices} />
       <Button
@@ -122,15 +139,15 @@ const styles = StyleSheet.create({
     marginTop: spacing.large,
   },
   phoneInput: {
-    paddingHorizontal: 10,
-    width: width * 0.82,
-    marginVertical: spacing.large,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingLeft: 10,
+    width: width * 0.85,
+    marginBottom: spacing.large,
+    // justifyContent: 'center',
+    // alignItems: 'center',
     borderColor: color.palette.iconsColor,
     borderBottomWidth: 1.7,
-    height: 45,
-    borderRadius: 7,
+    height: 40,
+    minHeight: 44,
   },
   phoneInputText: {
     fontSize: fontSize.body2,

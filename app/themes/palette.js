@@ -1,5 +1,6 @@
 export const palette = {
   primaryColor: '#f52d56',
+  primaryColorSoft: '#fdf6f6',
   secondaryColor: '#ff9500',
 
   //icons-colors
